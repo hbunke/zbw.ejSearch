@@ -1,0 +1,35 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:browser="http://namespaces.zope.org/browser">
+
+           
+           <!-- fuer portal_root setzen
+    <browser:page
+        for = "*"            
+        name = "ej_search_form"                 
+        class = ".SearchView"
+  	    permission = "zope2.Public"
+        template = "search_form.pt"/>
+
+    <browser:page
+        for="*"
+        name="searchView"
+        class=".SearchView"
+        allowed_interface = ".ISearchView"
+  	    permission = "zope2.Public" />
+-->
+
+    <browser:page
+        for="*"
+        name="ej_search_new"
+        class=".ejsearch.SearchView"
+        permission="zope2.Public" />
+
+    <browser:page
+        for = "*"            
+        name = "ej_search_form"                 
+  	    permission = "zope2.Public"
+        template = "ej_search_form.pt"/>
+
+
+</configure>

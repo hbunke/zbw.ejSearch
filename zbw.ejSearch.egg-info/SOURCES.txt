@@ -1,5 +1,7 @@
+.hgignore
 README.txt
 setup.py
+docs/HISTORY.txt
 zbw/__init__.py
 zbw.ejSearch.egg-info/PKG-INFO
 zbw.ejSearch.egg-info/SOURCES.txt
@@ -10,3 +12,5 @@ zbw.ejSearch.egg-info/not-zip-safe
 zbw.ejSearch.egg-info/requires.txt
 zbw.ejSearch.egg-info/top_level.txt
 zbw/ejSearch/__init__.py
+zbw/ejSearch/browser/__init__.py
+zbw/ejSearch/browser/ejsearch.py
