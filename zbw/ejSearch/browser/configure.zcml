@@ -21,7 +21,7 @@
 
     <browser:page
         for="*"
-        name="ej_search_new"
+        name="ej_search"
         class=".ejsearch.SearchView"
         permission="zope2.Public" />
 

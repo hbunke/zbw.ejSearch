@@ -30,13 +30,13 @@
       </a>         -->
                     
     <div tal:condition="not: papers">
-        <p><strong i18n:translate="description_no_results_found">No results were found.</strong></p>
+        <p><strong>No results were found.</strong></p>
     </div>
 
     <div tal:condition="papers">
         
-        <strong i18n:translate="batch_x_items_matching_your_criteria">
-            <span i18n:name="number" tal:omit-tag="" tal:content="python:len(papers)">234</span> items matching your criteria.
+        <strong>
+            <span tal:omit-tag="" tal:content="python:len(papers)" /> items matching your criteria.
         </strong>
 
         <table class="eJournal_paper_list">             

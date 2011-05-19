@@ -11,47 +11,42 @@
      tal:define="search_view context/@@searchView">
 
 
-    <h1 i18n:translate="ejournal-advanced-search">
+    <h1>
         Advanced Search
     </h1>
 
-    <tal:block i18n:domain="plone">
-        <p i18n:translate="description_advanced_search">
+
+
+    <tal:block>
+        <p>
         This search form enables you to find content on the site by
         specifying one or more search terms.
-        <br />
-        Remember that you can use the quick search anytime, it's normally
-        good enough, this search form is just if you want to be more specific.
         </p>
     </tal:block>
     <br />
     <p>
-        <a i18n:translate="ejournal-help"
+        <a 
            tal:attributes="href search_view/getSearchHelpLink"
            href="#">Help</a>
     </p>    
-  	<form action="ej_search_new"
+  	<form action="ej_search"
           method="get"
           name="search">
-
+       
         <fieldset>
 
-          <legend i18n:translate="ejournal-search-term">
+          <legend>
               Search Terms
           </legend>
                         
           <div>
-            <span i18n:translate="ejournal-journal-articles">
               Journal Articles
-            </span>  
             <input type="checkbox"
                    name="papers" 
                    value="journal"
                    checked="checked" />
 
-            <span i18n:translate="ejournal-discussion-papers">
-              Discussion Papers
-            </span>
+            Discussion Papers
             <input type="checkbox"
                    name="papers"
                    value="discussion"
@@ -59,7 +54,7 @@
           </div>
           <table>
             <tr>
-              <td i18n:translate="ejournal-fulltext">
+              <td>
                 Fulltext
               </td>
               <td>
@@ -68,7 +63,18 @@
               </td>
             </tr>
             <tr>
-              <td i18n:translate="ejournal-authors">
+              <td>
+                Title
+              </td>
+              <td>
+                <input name="title"
+                       size="50" />                
+              </td>
+            </tr>
+
+            
+            <tr>
+              <td>
                 Authors
               </td>
               <td>
@@ -77,7 +83,7 @@
               </td>
             </tr>
             <tr>
-              <td i18n:translate="ejournal-abstract">
+              <td>
                 Abstract
               </td>
               <td>
@@ -85,17 +91,8 @@
                        size="50" />                
               </td>
             </tr>
-            <tr>
-              <td i18n:translate="ejournal-title">
-                Title
-              </td>
+                        <tr>
               <td>
-                <input name="title"
-                       size="50" />                
-              </td>
-            </tr>
-            <tr>
-              <td i18n:translate="ejournal-jel-classification">
                 JEL Classification
               </td>
               <td>
@@ -104,19 +101,17 @@
               </td>
             </tr>
             <tr>
-              <td i18n:translate="ejournal-jel-help-link">
-                <span>
-                    The JEL class. system can e.g. be found 
-                </span>
+              <td class="discreet">
+                    The JEL classification system can e.g. be found 
                 <a 
-                   i18n:translate="ejournal-here"
                    href="#"
                    target="_blank"
                    tal:attributes="href search_view/getJELHelpLink">
                    here</a>.
                 </td>
             </tr>
-            
+
+            <!--
             <tr>
               <td i18n:translate="ejournal-year">
                 Year
@@ -149,10 +144,12 @@
                         <option value="3d">Last 3 days</option>
                       </select>       
                     </td>
-                  </tr>
-                </table>                  
-              </td> 
-            </tr>
+                </tr>
+            </table>
+
+        </tr>
+        -->
+
           </table>
         </fieldset>
 
@@ -160,7 +157,7 @@
                id="search"
                value="Search" 
                type="submit"
-               i18n:attributes="value" />
+               />
     
     </form>
 
