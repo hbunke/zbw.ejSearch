@@ -15,21 +15,14 @@
         Advanced Search
     </h1>
 
-
-
-    <tal:block>
-        <p>
-        This search form enables you to find content on the site by
-        specifying one or more search terms.
-        </p>
-    </tal:block>
-    <br />
     <p>
-        <a 
+        This search form enables you to find content on the site by
+        specifying one or more search terms. [<a 
            tal:attributes="href search_view/getSearchHelpLink"
-           href="#">Help</a>
+           href="#">Help</a>]
     </p>    
-  	<form action="ej_search"
+    
+    <form action="ej_search"
           method="get"
           name="search">
        
@@ -51,6 +44,14 @@
                    name="papers"
                    value="discussion"
                    checked="checked" />
+
+
+            Comments
+            <input type="checkbox"
+                   name="papers"
+                   value="comment"
+                   />
+
           </div>
           <table>
             <tr>

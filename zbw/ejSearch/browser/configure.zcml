@@ -22,7 +22,7 @@
     <browser:page
         for="*"
         name="ej_search"
-        class=".ejsearch.SearchView"
+        class=".ejsearch.EjournalSearchView"
         permission="zope2.Public" />
 
     <browser:page
@@ -30,6 +30,14 @@
         name = "ej_search_form"                 
   	    permission = "zope2.Public"
         template = "ej_search_form.pt"/>
+
+    
+    <!--test -->
+    <browser:page
+        for="*"
+        name="test_search"
+        permission="zope2.Public"
+        class=".search.SearchView" />
 
 
 </configure>

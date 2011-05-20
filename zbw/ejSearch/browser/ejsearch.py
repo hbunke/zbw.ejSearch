@@ -9,8 +9,9 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.AdvancedQuery import In, Eq, And, Or, Between
 
 
-class SearchView(BrowserView):
-    """custom search for ejournal"""
+class EjournalSearchView(BrowserView):
+    """custom search for ejournal papers. For custom search of
+    plone types see search.SearchView"""
 
     template = ViewPageTemplateFile("results.pt")
 
@@ -52,7 +53,10 @@ class SearchView(BrowserView):
             if query == "":
                 query = query_jp
             else:
-                query = Or(query, query_jp)    
+                query = Or(query, query_jp)   
+
+        #if "comment" in papers:
+        #    query = And(Eq('portal_type', "Comment"))
 
         if query == "":
             return []
