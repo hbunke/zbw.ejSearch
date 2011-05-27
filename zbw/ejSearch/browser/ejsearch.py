@@ -5,26 +5,32 @@
 # http://zbw.eu/
 
 from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.interface import Interface
 from Products.AdvancedQuery import In, Eq, And, Or, Between
 
+
+class IEjournalSearchView(Interface):
+    """Interface, which provides methods for sorting inside the eJournal.
+    """
+
+    def search():
+        """
+        custom search for ejournal types
+        """
 
 class EjournalSearchView(BrowserView):
     """custom search for ejournal papers. For custom search of
     plone types see search.SearchView"""
 
-    template = ViewPageTemplateFile("results.pt")
+    #template = ViewPageTemplateFile("results.pt")
 
-    def __call__(self):
-        self.request.set('disable_border', True)
-        return self.template()
+    #def __call__(self):
+    #    self.request.set('disable_border', True)
+    #    return self.template()
 
-    
-    
     def search(self, request):
         """
         """
-        
         # get serchterms
         searchable = request.form.get("SearchableText", None)
         fulltext   = request.form.get("fulltext", "")
@@ -104,5 +110,3 @@ class EjournalSearchView(BrowserView):
         brains = self.context.portal_catalog.evalAdvancedQuery(query)                
         return [brain.getObject() for brain in brains]
     
-
-

@@ -19,10 +19,12 @@
   	    permission = "zope2.Public" />
 -->
 
+    <!-- advanced search -->
     <browser:page
         for="*"
         name="ej_search"
         class=".ejsearch.EjournalSearchView"
+        allowed_interface = ".ejsearch.IEjournalSearchView"
         permission="zope2.Public" />
 
     <browser:page

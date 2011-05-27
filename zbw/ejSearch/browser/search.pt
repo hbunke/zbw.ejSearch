@@ -22,9 +22,9 @@
 <div metal:fill-slot="main"
      tal:define="use_types_blacklist request/use_types_blacklist | python:True;
                  use_navigation_root request/use_navigation_root | python:True;
-                 results python:here.queryCatalog(REQUEST=request,use_types_blacklist=use_types_blacklist, use_navigation_root=use_navigation_root);
+                 results python:here.queryCatalog(REQUEST=request,use_types_blacklist=use_types_blacklist, use_navigation_root=use_navigation_root, quote_logic=1);
                  Batch python:modules['Products.CMFPlone'].Batch;
-                 b_size python:30;b_start python:0;b_start request/b_start | b_start;
+                 b_size python:10;b_start python:0;b_start request/b_start | b_start;
                  desc_length site_properties/search_results_description_length;
                  desc_ellipsis site_properties/ellipsis;
                  searchterm request/SearchableText|nothing;
@@ -76,14 +76,18 @@
       </span>
     </h1>
 
-    <p class="discreet"
+    <tal:comment replace="nothing">
+        <!--
+        <p class="discreet"
        tal:condition="syntool/isSiteSyndicationAllowed">
         <a href=""
            class="link-feed"
            i18n:translate="title_rss_feed"
            tal:attributes="href string:$here_url/search_rss?${request/QUERY_STRING}">
              Subscribe to an always-updated feed of these search terms</a>
-    </p>
+     </p>
+     -->
+ </tal:comment>
 
 
     <div tal:condition="not: results">
@@ -120,6 +124,11 @@
                                  tal:content="structure python:view.result_text(result)"
                                  />
                          
+                         </dd>
+                         <dd class="discreet">
+                             <tal:textlines repeat="line python:view.result_quote(result)">
+                                 <p style="margin-bottom:3px;">"<span tal:content="structure line" />"</p>
+                             </tal:textlines>
                          </dd>
 
             <dd>
