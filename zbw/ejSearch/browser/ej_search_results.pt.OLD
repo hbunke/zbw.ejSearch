@@ -13,7 +13,7 @@
              tal:define="dummy python:request.set('disable_border',1)" />
 
 <div metal:fill-slot="main"
-    tal:define="view context/@@searchView;
+    tal:define="
                  use_types_blacklist request/use_types_blacklist | python:True;
                  papers_per_page python:10;
                  papers python:view.search(request);

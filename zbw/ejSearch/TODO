@@ -4,6 +4,8 @@ vim:ft=txt
 
 
 -   Überarbeitung der alten advanced search (eigenes formular etc.)
--   in standard search werden Discussionpaper *PDF* noch nicht gefunden
--   Anpassung des Suchschlitzes oben
--   Design-Überarbeitung auf Ergebnisseiten
+-   in standard search werden Discussionpaper+Comment *PDF* noch nicht gefunden
+        ==> liegt daran, dass deren PDF nur im textindexNG index 'ejFulltext' 
+        erfasst sind, nicht in 'SearchableText'
+
+

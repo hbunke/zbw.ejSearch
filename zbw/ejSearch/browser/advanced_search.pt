@@ -20,9 +20,11 @@
         specifying one or more search terms. [<a 
            tal:attributes="href search_view/getSearchHelpLink"
            href="#">Help</a>]
+       <br />
+       <a href="@@test_search">Standard Search</a>
     </p>    
     
-    <form action="ej_search"
+    <form action="@@ej_search"
           method="get"
           name="search">
        
@@ -59,7 +61,7 @@
                 Fulltext
               </td>
               <td>
-                <input name="fulltext"
+                <input name="SearchableText"
                        size="50" />                
               </td>
             </tr>

@@ -3,43 +3,37 @@
            xmlns:browser="http://namespaces.zope.org/browser">
 
            
-           <!-- fuer portal_root setzen
-    <browser:page
-        for = "*"            
-        name = "ej_search_form"                 
-        class = ".SearchView"
-  	    permission = "zope2.Public"
-        template = "search_form.pt"/>
+<!-- standard search -->
 
-    <browser:page
-        for="*"
-        name="searchView"
-        class=".SearchView"
-        allowed_interface = ".ISearchView"
-  	    permission = "zope2.Public" />
--->
-
-    <!-- advanced search -->
-    <browser:page
-        for="*"
-        name="ej_search"
-        class=".ejsearch.EjournalSearchView"
-        allowed_interface = ".ejsearch.IEjournalSearchView"
-        permission="zope2.Public" />
-
-    <browser:page
-        for = "*"            
-        name = "ej_search_form"                 
-  	    permission = "zope2.Public"
-        template = "ej_search_form.pt"/>
-
-    
-    <!--test -->
+    <!-- TODO: change 'name'; set 'for' portal_root -->
     <browser:page
         for="*"
         name="test_search"
         permission="zope2.Public"
         class=".search.SearchView" />
 
+    <browser:page 
+        for="*"
+        name="result_view"
+        permission="zope2.Public"
+        class=".result.SearchResults"
+        allowed_interface = ".interfaces.ISearchResults" />
+       
+
+<!-- advanced search -->
+    <browser:page
+        for="*"
+        name="ej_search"
+        class=".advanced_search.AdvancedSearchView"
+        allowed_interface = ".interfaces.IAdvancedSearchView"
+        permission="zope2.Public" />
+
+    <browser:page
+        for = "*"            
+        name = "ej_advanced_search"                 
+  	    permission = "zope2.Public"
+        template = "advanced_search.pt"/>
+
+    
 
 </configure>

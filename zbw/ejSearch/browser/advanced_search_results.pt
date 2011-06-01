@@ -20,49 +20,17 @@
 
 <body>
 <div metal:fill-slot="main"
-     tal:define="use_types_blacklist request/use_types_blacklist | python:True;
-                 use_navigation_root request/use_navigation_root | python:True;
-                 results python:here.queryCatalog(REQUEST=request,use_types_blacklist=use_types_blacklist, use_navigation_root=use_navigation_root, quote_logic=1);
+     tal:define="use_navigation_root request/use_navigation_root | python:True;
                  Batch python:modules['Products.CMFPlone'].Batch;
                  b_size python:10;b_start python:0;b_start request/b_start | b_start;
                  desc_length site_properties/search_results_description_length;
                  desc_ellipsis site_properties/ellipsis;
-                 searchterm request/SearchableText|nothing;
                  use_view_action site_properties/typesUseViewActionInListings|python:();
+                 results python:view.search(request);
                  ">
 
-
-    <form id="searchform" 
-          action="test_search"
-          class="searchPage">
-        <div>
-        <input class="searchPage"
-               name="SearchableText"
-               type="text"
-               size="25"
-               title="Search Site"
-               i18n:attributes="title title_search_title;"
-               tal:attributes="value request/SearchableText|nothing;"
-               />
-        <input class="searchPage searchButton"
-               type="submit"
-               value="Search"
-               i18n:attributes="value label_search;"/>
-        </div>
-
-        <p class="discreet" style="margin-bottom:18px;">
-        Did you not find what you were looking for? Try
-        <a href=""
-           i18n:translate="search_results_advanced_link"
-           tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/search_form?SearchableText=${request/SearchableText|python:''}">
-           Economics Advanced Search</a>
-        to refine your search.
-        </p>
-    </form>
-
-
     <h1 class="documentFirstHeading">
-            Search results
+         Advanced Search Results
         <span class="discreet">
         &mdash;
         <span
@@ -111,13 +79,11 @@
                  tal:attributes="href url;
                                  class string:$item_wf_state_class"
                                  
-                                 tal:content="structure
-                                 python:result_view.title(result)" />
+                                 tal:content="structure python:result_view.title(result)" />
                          </dt>
                          <dd class="discreet">
                              <span
-                                 tal:content="structure
-                                 python:result_view.text(result)"
+                                 tal:content="structure python:result_view.text(result)"
                                  />
                          
                          </dd>
