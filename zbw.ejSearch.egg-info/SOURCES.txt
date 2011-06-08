@@ -15,9 +15,12 @@ zbw/ejSearch/TODO
 zbw/ejSearch/__init__.py
 zbw/ejSearch/configure.zcml
 zbw/ejSearch/browser/__init__.py
+zbw/ejSearch/browser/advanced_search.pt
+zbw/ejSearch/browser/advanced_search.py
+zbw/ejSearch/browser/advanced_search_results.pt
 zbw/ejSearch/browser/configure.zcml
-zbw/ejSearch/browser/ej_search_form.pt
-zbw/ejSearch/browser/ejsearch.py
-zbw/ejSearch/browser/results.pt
+zbw/ejSearch/browser/ej_search_results.pt.OLD
+zbw/ejSearch/browser/interfaces.py
+zbw/ejSearch/browser/result.py
 zbw/ejSearch/browser/search.pt
 zbw/ejSearch/browser/search.py

@@ -34,7 +34,9 @@
 
     <form id="searchform" 
           action="test_search"
-          class="searchPage">
+          class="searchPage"
+          style="float:none; margin-bottom:30px;"
+          >
         <div>
         <input class="searchPage"
                name="SearchableText"
@@ -49,7 +51,11 @@
                value="Search"
                i18n:attributes="value label_search;"/>
         </div>
-
+        
+        
+    </form>
+    
+    <tal:comment tal:replace="nothing">
         <p class="discreet" style="margin-bottom:18px;">
         Did you not find what you were looking for? Try
         <a href=""
@@ -58,18 +64,15 @@
            Economics Advanced Search</a>
         to refine your search.
         </p>
-    </form>
+    </tal:comment>
 
 
-    <h1 class="documentFirstHeading">
-            Search results
-        <span class="discreet">
-        &mdash;
-        <span
+    <p class="discreet" style="text-align:center">
+       
+    <span
         tal:omit-tag="" 
         tal:content="python:len(results)">234</span> items matching your search terms
-        </span>
-    </h1>
+    </p>
 
     <tal:comment replace="nothing">
         <!--

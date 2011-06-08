@@ -1,11 +1,31 @@
 vim:ft=txt
 
+read:
+http://plone.org/documentation/manual/plone-community-developer-documentation/searching-and-indexing/
+
+sehr umfangreiche doku zu index, catalog search etc.
+
 #TODO
 
 
 -   Überarbeitung der alten advanced search (eigenes formular etc.)
+(später, nach themesseiten)
+
 -   in standard search werden Discussionpaper+Comment *PDF* noch nicht gefunden
         ==> liegt daran, dass deren PDF nur im textindexNG index 'ejFulltext' 
         erfasst sind, nicht in 'SearchableText'
+        - 'File' implementiert nicht IATFile, das von textindexng adaptiert ist
+        - file ist lediglich ein attribut von discussionpaper!
 
+        ==> 
+        -   textindexng indexes ändern in @indexer methoden in catalog.py
+        -   textindexng deinstallieren! (endlich!!! :-)
+        -   evtl. versuchen, für searchable text bei discussionpapers eigene
+            methode. siehe http://stackoverflow.com/questions/5630350/how-to-make-richtextvalue-catalog-full-text-search-for-plone-4
+        -   ansonsten einfach erstmal die pdfs von discussionpapers/comments erstmal
+            ignorieren
+
+test this: http://maurits.vanrees.org/weblog/archive/2009/03/when-your-correctly-configured-portal-tool-is-not-working
+
+-   evtl. doch noch mal collective.solr testen
 

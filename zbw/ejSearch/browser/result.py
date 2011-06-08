@@ -100,17 +100,18 @@ class SearchResults(BrowserView):
 
         search = self.request.SearchableText
         
-        if result.portal_type in ('DiscussionPaper', 'JournalPaper'):
+        if result.portal_type in ('JournalPaper'):
             result_text = html2text(result.getAbstract, 
                     ignore_tags=('a','span','br','p'))
 
         else:
             #Due to catalog out of sync, result.SearchableText sometimes returns
             #'Missing.Value', while result.getObject().SearchableText returns
-            #as expected. So in that case we must get the object
-            try:
+            #as expected. So in that case we must get the object. We test this
+            #with basestring (True for str and unicode)
+            if isinstance(result.SearchableText, basestring):
                 result_text = result.SearchableText
-            except:
+            else:
                 result_text = result.getObject().SearchableText()
                 #TODO catch errors
                 
@@ -119,12 +120,13 @@ class SearchResults(BrowserView):
         quotes = set(quotes)
         search_text = self.request.SearchableText.split()
         
+        # TODO: look at standard plone search for lower() the search_text and
+        # stripping the quotation marks
         for t in search_text:
-            #import pdb; pdb.set_trace()
-            if t in result_text:
+            if t.lower() in result_text:
                 lines = re.split(r'\s*[!?.]\s*', result_text)
                 for line in lines:
-                    if t in line and len(quotes) < 3:
+                    if t.lower() in line and len(quotes) < 3:
                         quotes.add(line)
         
         return quotes
