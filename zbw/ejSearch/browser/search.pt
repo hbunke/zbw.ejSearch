@@ -33,9 +33,9 @@
 
 
     <form id="searchform" 
-          action="test_search"
+          action="ej-search"
           class="searchPage"
-          style="float:none; margin-bottom:30px;"
+          style="float:none; margin-bottom:20px;"
           >
         <div>
         <input class="searchPage"
@@ -56,6 +56,7 @@
     </form>
     
     <tal:comment tal:replace="nothing">
+        <!--
         <p class="discreet" style="margin-bottom:18px;">
         Did you not find what you were looking for? Try
         <a href=""
@@ -64,6 +65,7 @@
            Economics Advanced Search</a>
         to refine your search.
         </p>
+        -->
     </tal:comment>
 
 
@@ -87,10 +89,13 @@
      -->
  </tal:comment>
 
-
+ <tal:comment replace="nothing">
+ <!--
     <div tal:condition="not: results">
         <p><strong i18n:translate="description_no_results_found">No results were found.</strong></p>
     </div>
+ -->
+ </tal:comment>
 
     <div tal:condition="results"
           tal:define="batch python:Batch(results, b_size, int(b_start), orphan=1);">
@@ -101,7 +106,7 @@
             <!--    <tal:block tal:condition="python:result.portal_type in use_view_action"> -->
         
                 <tal:entry define="
-                           result_view result/@@result_view;
+                           result_view result/@@ej-result-view;
                            result_type result/portal_type;
                            item_icon python:plone_view.getIcon(result);
                            url python:result_view.url(result)">
@@ -111,8 +116,7 @@
               <img tal:replace="structure item_icon/html_tag" />
                <a
                  href="#" 
-                 tal:attributes="href url;
-                                 class string:$item_wf_state_class"
+                 tal:attributes="href url"
                                  
                                  tal:content="structure
                                  python:result_view.title(result)" />

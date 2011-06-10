@@ -7,33 +7,35 @@
 
     <!-- TODO: change 'name'; set 'for' portal_root -->
     <browser:page
-        for="*"
-        name="test_search"
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="ej-search"
         permission="zope2.Public"
         class=".search.SearchView" />
 
     <browser:page 
         for="*"
-        name="result_view"
+        name="ej-result-view"
         permission="zope2.Public"
         class=".result.SearchResults"
         allowed_interface = ".interfaces.ISearchResults" />
+
+    
        
 
-<!-- advanced search -->
+<!-- advanced search // not activated yet
     <browser:page
         for="*"
-        name="ej_search"
+        name="ej_advanced_search"
         class=".advanced_search.AdvancedSearchView"
         allowed_interface = ".interfaces.IAdvancedSearchView"
         permission="zope2.Public" />
 
     <browser:page
         for = "*"            
-        name = "ej_advanced_search"                 
+        name = "ej_advanced_search_results"                 
   	    permission = "zope2.Public"
         template = "advanced_search.pt"/>
-
+-->
     
 
 </configure>
