@@ -26,7 +26,7 @@ class SearchResults(BrowserView):
             paper = obj.aq_parent
             paper_view = getMultiAdapter(
                     (paper, self.request), name='paperView')
-            text = "<em>%s</em>: %s" % (paper_view.getAuthorsForTitle(),
+            text = "<em>%s</em>: %s" % (paper_view.authors_as_string(),
                     paper.Title())
             
             return text
@@ -35,7 +35,7 @@ class SearchResults(BrowserView):
             paper = result.getObject()
             paper_view = getMultiAdapter((paper, self.request), 
                     name='paperView')
-            text = "<em>%s</em>: %s" % (paper_view.getAuthorsForTitle(), 
+            text = "<em>%s</em>: %s" % (paper_view.authors_as_string(), 
                     paper.Title())
             return text
 

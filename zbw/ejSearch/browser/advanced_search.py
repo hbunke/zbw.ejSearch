@@ -86,6 +86,8 @@ class AdvancedSearchView(BrowserView):
             query_fulltext = In("SearchableText", fulltext)            
             query = And(query, query_fulltext)
 
+
+#### XXX getAuthorsForTitle nicht mehr existent. refactoren!
         if authors != "":
             query_author = In("getAuthorsForTitle", authors)            
             query = And(query, query_author)
