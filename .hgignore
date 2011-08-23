@@ -5,3 +5,4 @@ syntax: glob
 *.pyc
 build/
 dist/
+*egg-info/
