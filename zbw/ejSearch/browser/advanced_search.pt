@@ -17,7 +17,12 @@
 
     <p>
         This search form enables you to find content on the site by
-        specifying one or more search terms. [<a 
+        specifying one or more search terms.
+        <tal:comment replace="nothing">
+        <!--XXX search_view existiert nicht mehr. methode müsste in neuen view.
+             fragt lediglich ejournal_tool ab: ejtool.path_to_search_help -->
+             </tal:comment>
+        [<a 
            tal:attributes="href search_view/getSearchHelpLink"
            href="#">Help</a>]
        <br />
@@ -106,7 +111,13 @@
             <tr>
               <td class="discreet">
                     The JEL classification system can e.g. be found 
-                <a 
+                    
+                    <tal:comment replace="nothing">
+                        <!-- XXX search_view existiert nicht mehr. Methode
+                             fragt auch lediglich ejournal_tool ab: return ejtool.search_years
+                        -->
+                    </tal:comment>
+                    <a 
                    href="#"
                    target="_blank"
                    tal:attributes="href search_view/getJELHelpLink">
