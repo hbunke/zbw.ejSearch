@@ -8,7 +8,7 @@
 import re
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
-from Products.stripogram import html2text
+from stripogram import html2text
 
 
 class SearchResults(BrowserView):
