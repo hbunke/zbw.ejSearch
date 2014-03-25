@@ -20,7 +20,7 @@
         specifying one or more search terms.
         <tal:comment replace="nothing">
         <!--XXX search_view existiert nicht mehr. methode müsste in neuen view.
-             fragt lediglich ejournal_tool ab: ejtool.path_to_search_help -->
+             fragt lediglich ejournal_tool ab: path_to_search_help -->
              </tal:comment>
         [<a 
            tal:attributes="href search_view/getSearchHelpLink"
@@ -114,7 +114,7 @@
                     
                     <tal:comment replace="nothing">
                         <!-- XXX search_view existiert nicht mehr. Methode
-                             fragt auch lediglich ejournal_tool ab: return ejtool.search_years
+                             fragt auch lediglich ejournal_tool ab: return search_years
                         -->
                     </tal:comment>
                     <a 
