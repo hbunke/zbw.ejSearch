@@ -127,12 +127,11 @@ class SearchResults(BrowserView):
         for t in search_text:
             t = t.lower()
             t = t.replace('"', '')
-            if t in result_text:
+            if t in result_text.lower():
                 lines = re.split(r'\s*[!?.]\s*', result_text)
                 for line in lines:
-                    if t in line and len(quotes) < 3:
+                    if t in line.lower() and len(quotes) < 3:
                         quotes.add(line)
-        
         return quotes
 
 
