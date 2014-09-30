@@ -33,21 +33,29 @@
                  ">
 
 
-    <form id="searchform" 
+        <tal:comment tal:replace="nothing">         
+        <!-- this had originally a class="searchPage". That was the target for
+            some obscure Plone JS somewhere that called the original search page, and not the
+            ejournal one. -->
+        </tal:comment>
+        <form tal:define="portal_root context/absolute_url"
+          tal:attributes="action string:${portal_root}/@@ej-search"
+          id="searchform" 
           action="ej-search"
-          class="searchPage"
           style="float:none; margin-bottom:20px;"
           >
         <div>
         <input class="searchPage"
-               name="SearchableText"
+            name="SearchableText"
+            style="max-width:435px;"
                type="text"
                size="25"
                title="Search Site"
                i18n:attributes="title title_search_title;"
                tal:attributes="value request/SearchableText|nothing;"
                />
-        <input class="searchPage searchButton"
+           <input class="searchPage searchButton"
+               style="display:inline;"
                type="submit"
                value="Search"
                i18n:attributes="value label_search;"/>
@@ -113,7 +121,8 @@
                            item_icon python:plone_view.getIcon(result);
                            url python:result_view.url(result)">
                            
-                 <dt tal:define="item_wf_state_class string:state-${result/review_state};"
+                <dt style="font-size:140%; font-weight:normal; line-height:24px; margin-top:12px;"
+                               tal:define="item_wf_state_class string:state-${result/review_state};"
                 tal:attributes="class python:'contenttype-' + normalizeString(result.portal_type)">
               <img tal:replace="structure item_icon/html_tag" />
                <a
