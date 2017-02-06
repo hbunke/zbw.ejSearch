@@ -7,7 +7,7 @@
       i18n:domain="plone">
 <head>
     <metal:block metal:fill-slot="head_slot">
-        <link tal:define="here_url context/@@plone_context_state/object_url;" 
+        <link tal:define="here_url context/@@plone_context_state/object_url;"
             rel="alternate" title="RSS 1.0" type="application/rss+xml"
               tal:condition="request/SearchableText|nothing"
               tal:attributes="href string:$here_url/search_rss?${request/QUERY_STRING}"/>
@@ -33,37 +33,39 @@
                  ">
 
 
-        <tal:comment tal:replace="nothing">         
+        <tal:comment tal:replace="nothing">
         <!-- this had originally a class="searchPage". That was the target for
             some obscure Plone JS somewhere that called the original search page, and not the
             ejournal one. -->
         </tal:comment>
+        <h1>Search</h1>
+        <div class="container" id="ej-search-results">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+
+
         <form tal:define="portal_root context/absolute_url"
           tal:attributes="action string:${portal_root}/@@ej-search"
-          id="searchform" 
-          action="ej-search"
-          style="float:none; margin-bottom:20px;"
+          id="searchform"
+          class="form-inline"
+          style="margin-bottom:33px;"
           >
         <div>
-        <input class="searchPage"
+        <input class="form-control input-lg"
             name="SearchableText"
-            style="max-width:435px;"
                type="text"
-               size="25"
+               id="input_term"
                title="Search Site"
                i18n:attributes="title title_search_title;"
                tal:attributes="value request/SearchableText|nothing;"
                />
-           <input class="searchPage searchButton"
-               style="display:inline;"
-               type="submit"
-               value="Search"
-               i18n:attributes="value label_search;"/>
+           <button class="btn btn-info"
+               type="submit"><i class="fa fa-search" /></button>
         </div>
-        
-        
+
+
     </form>
-    
+
     <tal:comment tal:replace="nothing">
         <!--
         <p class="discreet" style="margin-bottom:18px;">
@@ -78,140 +80,94 @@
     </tal:comment>
 
 
-    <p class="discreet" style="text-align:center">
-       
-    <span
-        tal:omit-tag="" 
-        tal:content="python:len(results)">234</span> items matching your search terms
-    </p>
+                <p id="items_matching">
 
-    <tal:comment replace="nothing">
-        <!--
-        <p class="discreet"
-       tal:condition="syntool/isSiteSyndicationAllowed">
-        <a href=""
-           class="link-feed"
-           i18n:translate="title_rss_feed"
-           tal:attributes="href string:$here_url/search_rss?${request/QUERY_STRING}">
-             Subscribe to an always-updated feed of these search terms</a>
-     </p>
-     -->
- </tal:comment>
+                <span
+                    tal:omit-tag=""
+                    tal:content="python:len(results)">234</span> items matching your search terms
+                </p>
 
- <tal:comment replace="nothing">
- <!--
-    <div tal:condition="not: results">
-        <p><strong i18n:translate="description_no_results_found">No results were found.</strong></p>
+                <tal:comment replace="nothing">
+                    <!--
+                    <p class="discreet"
+                   tal:condition="syntool/isSiteSyndicationAllowed">
+                    <a href=""
+                       class="link-feed"
+                       i18n:translate="title_rss_feed"
+                       tal:attributes="href string:$here_url/search_rss?${request/QUERY_STRING}">
+                         Subscribe to an always-updated feed of these search terms</a>
+                 </p>
+                 -->
+             </tal:comment>
+
+             <tal:comment replace="nothing">
+             <!--
+                <div tal:condition="not: results">
+                    <p><strong i18n:translate="description_no_results_found">No results were found.</strong></p>
+                </div>
+             -->
+             </tal:comment>
+
+                <div tal:condition="results"
+                      tal:define="results_sorted python:view.results_sorted(results);
+                                  batch python:Batch(results_sorted, b_size, int(b_start), orphan=1);">
+
+                    <dl class="searchResults">
+                        <tal:results repeat="result batch">
+
+                        <!--    <tal:block tal:condition="python:result.portal_type in use_view_action"> -->
+
+                            <tal:entry define="
+                                normalizeString nocall:context/@@plone/normalizeString;
+                                       result_view result/@@ej-result-view;
+                                       result_type result/portal_type;
+                                       item_icon python:plone_view.getIcon(result);
+                                       url python:result_view.url(result)">
+
+                            <dt 
+                                           tal:define="item_wf_state_class string:state-${result/review_state};"
+                            tal:attributes="class python:'contenttype-' + normalizeString(result.portal_type)">
+
+                           <a
+                             href="#"
+                             tal:attributes="href url"
+                             tal:content="structure python:result_view.title(result)" />
+                        </dt>
+                                     <dd class="discreet">
+                                         <span
+                                             tal:content="structure
+                                             python:result_view.text(result)"
+                                             />
+
+                                     </dd>
+                                     <dd class="excerpt">
+                                         <tal:textlines repeat="line python:result_view.quote(result)">
+                                             <p style="margin-top:6px;"><i class="fa fa-quote-left" aria-hidden="true"></i>
+
+                                                 <span tal:content="structure line" />
+                                            </p>
+                                         </tal:textlines>
+                                     </dd>
+
+                        <dd>
+
+                    </tal:entry>
+
+                    <!--       </tal:block> -->
+
+
+                    </tal:results>
+                    </dl>
+
+
+                    <div id="pagination">
+                        <div metal:use-macro="here/batch_macros/macros/navigation" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
- -->
- </tal:comment>
-
-    <div tal:condition="results"
-          tal:define="batch python:Batch(results, b_size, int(b_start), orphan=1);">
-
-        <dl class="searchResults">
-        <tal:results repeat="result batch">
-            
-            <!--    <tal:block tal:condition="python:result.portal_type in use_view_action"> -->
-        
-                <tal:entry define="
-                    normalizeString nocall:context/@@plone/normalizeString;
-                           result_view result/@@ej-result-view;
-                           result_type result/portal_type;
-                           item_icon python:plone_view.getIcon(result);
-                           url python:result_view.url(result)">
-                           
-                <dt style="font-size:140%; font-weight:normal; line-height:24px; margin-top:12px;"
-                               tal:define="item_wf_state_class string:state-${result/review_state};"
-                tal:attributes="class python:'contenttype-' + normalizeString(result.portal_type)">
-              <img tal:replace="structure item_icon/html_tag" />
-               <a
-                 href="#" 
-                 tal:attributes="href url"
-                                 
-                                 tal:content="structure
-                                 python:result_view.title(result)" />
-                         </dt>
-                         <dd class="discreet">
-                             <span
-                                 tal:content="structure
-                                 python:result_view.text(result)"
-                                 />
-                         
-                         </dd>
-                         <dd class="discreet">
-                             <tal:textlines repeat="line python:result_view.quote(result)">
-                                 <p style="margin-bottom:3px;">"<span tal:content="structure line" />"</p>
-                             </tal:textlines>
-                         </dd>
-
-            <dd>
-            
-            <tal:comment replace="nothing">
-            <!--
-            
-                <span tal:replace="python:plone_view.cropText(result.Description, desc_length, desc_ellipsis)">
-                    Cropped description
-                </span>
-
-            <span class="documentByLine"
-                  tal:condition="python:not isAnon or site_properties.allowAnonymousViewAbout">
-                <span class="documentAuthor"
-                    i18n:translate="label_by_author">
-                by
-                <a href="#"
-                   tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/author/${result/Creator}"
-                   tal:content="result/Creator"
-                   tal:omit-tag="not:result/Creator"
-                   i18n:name="author">
-                Bob Dobalina
-                </a>
-
-                </span>
-
-                <span class="documentModified">
-                  &mdash;
-                    <span i18n:translate="box_last_modified">
-                    last modified
-                    </span>
-                    <span tal:replace="python:toLocalizedTime(result.ModificationDate, long_format=1)">
-                    August 16, 2001 at 23:35:59
-                    </span>
-                </span>
-
-                
-                
-
-                <span class="relevance" 
-                      tal:condition="result/data_record_normalized_score_">
-                    &mdash;
-                    <tal:relevance i18n:translate="label_relevance_percentage">
-                    Relevance:
-                        <span tal:content="result/data_record_normalized_score_"
-                               tal:omit-tag=""
-                               i18n:name="percentage">23</span>%
-                    </tal:relevance>
-                </span>
-            </span>
-
-            </dd>
-            
-           -->
-           </tal:comment>
-
-        </tal:entry>
-
-        <!--       </tal:block> -->
-
-
-        </tal:results>
-        </dl>
-         
-        <div metal:use-macro="here/batch_macros/macros/navigation" />
-
-    </div>
-
 </div>
 </body>
 </html>
-

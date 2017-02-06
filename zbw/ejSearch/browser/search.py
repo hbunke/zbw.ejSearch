@@ -17,4 +17,7 @@ class SearchView(BrowserView):
     def __call__(self):
         self.request.set('disable_border', True)
         return self.template()
-   
+
+
+    def results_sorted(self, results):
+        return sorted(results, key=lambda result: result.created, reverse=True)
